@@ -20,8 +20,8 @@ CREATE TABLE transactions (
   user_id UUID REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
   amount NUMERIC NOT NULL,
   description TEXT NOT NULL,
-  category TEXT NOT NULL CHECK (category IN ('Essential', 'Leisure', 'Investment', 'Rat Race Trap')),
-  type TEXT NOT NULL CHECK (type IN ('income', 'expense')),
+  category TEXT CHECK (category IN ('Necesidad', 'Ocio', 'Inversión', 'Trampa')),
+  type TEXT NOT NULL CHECK (type IN ('ingreso', 'gasto')),
   date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

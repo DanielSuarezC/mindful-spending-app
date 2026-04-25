@@ -19,22 +19,21 @@ export class AcademyService {
   async fetchDailyTip() {
     const today = new Date().toISOString().split('T')[0];
     
-    const { data, error } = await this.supabase.client
+    const { data } = await this.supabase.client
       .from('educational_tips')
       .select('*')
       .eq('display_date', today)
-      .single();
+      .maybeSingle();
 
     if (data) {
       this.dailyTip.set(data as Tip);
     } else {
-      // Fallback or fetch any tip if none for today
       const { data: randomTip } = await this.supabase.client
         .from('educational_tips')
         .select('*')
         .limit(1)
-        .single();
-      
+        .maybeSingle();
+
       if (randomTip) this.dailyTip.set(randomTip as Tip);
     }
   }

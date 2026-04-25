@@ -14,6 +14,7 @@ export class SupabaseService {
         detectSessionInUrl: true,
         persistSession: true,
         autoRefreshToken: true,
+        lock: <R>(_name: string, _acquireTimeout: number, fn: () => Promise<R>) => fn(),
       }
     });
   }
